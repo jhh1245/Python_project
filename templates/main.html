@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maxinum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+		
+		<title>post page</title>
+        <style>
+         @font-face {
+            font-family: 'Jalnan';
+            font-weight: normal;
+            font-style: normal;
+            src: url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.eot');
+            src: url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.eot?#iefix') format('embedded-opentype'),
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.woff2') format('woff2'),
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.woff') format('woff'),
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.ttf') format("truetype"); font-display: swap;
+        } 
+        body {
+            font-family:'Jalnan';
+        }
+        </style>
+	</head>
+	<body>
+	<nav class="navbar navbar-expand-sm  navbar-dark sticky-top" style="background-color: #EF6759;">
+		<!--LOGO-->
+		<a class="navbar-brand" href="/">쩝쩝박사</a>
+		<!--Links-->
+		<div class="container-fluid full-width">
+		<ul class="nav navbar-nav">
+		<li class="nav-item">
+			<a class="nav-link" href="/post">게시판</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/admin">관리자메뉴</a>
+		</li>
+		</ul>
+		<div>
+		
+            </div></div>
+        </nav>
+
+	<div class="container">
+        <br><h1><strong><a style="color:#110957;">식단 선택</a></strong></h1><br>
+
+    <form action="/order" method="get"> <!--form 시작-->
+        <br>
+        <div class="form-group">
+        사원번호 :<input id="txtTitle" name="employee_num" type="text" placeholder="사번을 입력하세요." class="form-control input-md col-md-3", autofocus required>
+        </div>
+                    
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                 <!--메뉴 번호 ([0][0], [1][0]) 체크박스의 이름을 실제 메뉴 아이디 값으로 해서 보내줌 -->
+                <input type="checkbox" name="menu_chk0" value="{{today_list[0][0]}}">&nbsp; &nbsp;메뉴 1</td> <!--체크박스 value = 메뉴 번호-->
+            <td>
+                <input type="checkbox" name="menu_chk1" value="{{today_list[1][0]}}">&nbsp; &nbsp;메뉴 2</td>
+        </tr>
+        <tr id="f649ca95-a079-4d1f-884b-bd3fd999700e">
+            <td>
+                <img src = {{url_for("static", filename = '/source/food_menu1.png')}} width="250" height="250"></td>
+            <td><img src = {{url_for("static", filename = '/source/food_menu2.png')}} width="250" height="250"></td></tr>
+        <tr>
+            <td>메인메뉴 : {{today_list[0][2]}}</td>
+            <td>메인메뉴 : {{today_list[1][2]}}</td>
+        </tr>
+        <tr>
+            <td>세부메뉴 : {{today_list[0][3]}}, {{today_list[0][4]}}, {{today_list[0][5]}}, {{today_list[0][6]}}, {{today_list[0][7]}}</td>
+            <td>세부메뉴 : {{today_list[1][3]}}, {{today_list[1][4]}}, {{today_list[1][5]}}, {{today_list[1][6]}}, {{today_list[1][7]}}</td>
+        </tr>
+        
+        <tr>
+            <td>준비식수 : {{today_list[0][9]}}개<br><br>잔여식수 : {{remaining_qty[0]}}개</td>
+            <td>준비식수 : {{today_list[1][9]}}개<br><br>잔여식수 : {{remaining_qty[1]}}개</td>
+        </tr></table>
+    
+        
+
+        <button class="btn btn-light">주문하기</button>
+        </form></div>
+</body></html>

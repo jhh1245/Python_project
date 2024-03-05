@@ -1,0 +1,68 @@
+<html>
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maxinum-scale=1, user-scalable=no">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+		
+		<title>post page</title>
+        <style>
+         @font-face {
+            font-family: 'Jalnan';
+            font-weight: normal;
+            font-style: normal;
+            src: url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.eot');
+            src: url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.eot?#iefix') format('embedded-opentype'),
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.woff2') format('woff2'),
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.woff') format('woff'),
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.ttf') format("truetype"); font-display: swap;
+        } 
+        body {
+            font-family:'Jalnan';
+        }
+        </style>
+	</head>
+	<body>
+	<nav class="navbar navbar-expand-sm  navbar-dark sticky-top" style="background-color: #EF6759;">
+		<!--LOGO-->
+		<a class="navbar-brand" href="/">쩝쩝박사</a>
+		<!--Links-->
+		<div class="container-fluid full-width">
+		<ul class="nav navbar-nav">
+		<li class="nav-item">
+			<a class="nav-link" href="/post">게시판</a>
+		</li>
+		<li class="nav-item active">
+			<a class="nav-link" href="/admin">관리자메뉴</a>
+		</li>
+		</ul>
+		<div>
+		
+            </div></div>
+        </nav>
+
+    <div class="container">
+        <div class="header">
+            <h3 class="text-muted">매출 현황</h3>
+        </div>
+        <section>
+            <form class="form-horizontal" method="get" action="/sales_proc">
+                <fieldset>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-12" for="txtTitle">월 선택</label>
+                        <div class="col-md-12">
+                            <input id="txtEmployeeNum" name="month" type="text" placeholder="월을 입력하세요." class="form-control input-md", autofocus required><!--required : 공백입력시 경고-->
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-light" type="submit"><strong>검색</strong></button>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
