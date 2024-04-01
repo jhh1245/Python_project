@@ -1,16 +1,17 @@
 <html>
-     <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maxinum-scale=1, user-scalable=no">
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		
-		<title>쩝쩝박사</title>
-        <style>
-         @font-face {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maxinum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <title>쩝쩝박사</title>
+    <style>
+        @font-face {
             font-family: 'Jalnan';
             font-weight: normal;
             font-style: normal;
@@ -18,38 +19,50 @@
             src: url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.eot?#iefix') format('embedded-opentype'),
                 url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.woff2') format('woff2'),
                 url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.woff') format('woff'),
-                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.ttf') format("truetype"); font-display: swap;
-        } 
-        body {
-            font-family:'Jalnan';
+                url('https://cdn.jsdelivr.net/gh/webfontworld/goodchoice/Jalnan.ttf') format("truetype");
+            font-display: swap;
         }
-        </style>
-	</head>
-	<body>
-	<nav class="navbar navbar-expand-sm  navbar-dark sticky-top" style="background-color: #EF6759;">
-		<!--LOGO-->
-		<a class="navbar-brand" href="/">쩝쩝박사</a>
-		<!--Links-->
-		<div class="container-fluid full-width">
-		<ul class="nav navbar-nav">
-		<li class="nav-item">
-			<a class="nav-link" href="/post">게시판</a>
-		</li>
-		<li class="nav-item active">
-			<a class="nav-link" href="/admin">관리자메뉴</a>
-		</li>
-		</ul>
-		<div>
-		
-            </div></div>
-        </nav>
-<div class="container">
-	<br><h1><strong><a style="color:#110957;">사진업로드</a></strong></h1>
-    <br>
+
+        body {
+            font-family: 'Jalnan';
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm  navbar-dark sticky-top" style="background-color: #EF6759;">
+        <!--LOGO-->
+        <a class="navbar-brand" href="/">쩝쩝박사</a>
+        <!--Links-->
+        <div class="container-fluid full-width">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/post">게시판</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin">관리자메뉴</a>
+                </li>
+            </ul>
+            <div>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <br>
+        <h1><strong><a style="color:#110957;">사진업로드</a></strong></h1>
+        <br>
         <section>
 
-    <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_done') }}"> <!--post : 웹 페이지에 넘길때 주소창에 포함되지 않음, multipart/form-data : 파일 등록하기 위함.  upload_done이라는 곳으로 보낸다.-->
-        <input class="btn btn-light" type="file" name="file"/><br><br><br>
-        &nbsp;&nbsp;<button class="btn btn-light" type="submit"><strong>등록하기</strong></button>
-        
-            </form></section></div></body></html>
+
+            <form method="POST" enctype="multipart/form-data" action="\upload_done">
+                <!--post : 웹 페이지에 넘길때 주소창에 포함되지 않음, multipart/form-data : 파일 등록하기 위함.  upload_done이라는 곳으로 보낸다.-->
+                <input class="btn btn-light" type="file" name="file" /><br><br><br>
+                &nbsp;&nbsp;<button class="btn btn-light" type="submit"><strong>등록하기</strong></button>
+
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>

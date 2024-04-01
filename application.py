@@ -5,6 +5,12 @@ import database
 import pymysql
 import datetime #오늘날짜 
 
+#파일처리
+import os
+try:
+	from werkzeug.utils import secure_filename
+except:
+	from werkzeug import secure_filename
 
 dt_now = datetime.datetime.now()
 dt_now = dt_now.date() #날짜만
@@ -21,20 +27,11 @@ def main():
     today_list = database.load_today_list()
     remaining_qty = database.load_remaining_qty()
     
-    print("이건 today_list")
-    print(today_list)
-    print("이건 remaining_qty")
-    print(remaining_qty)
     return render_template("main.html", today_list = today_list, remaining_qty = remaining_qty); #이 페이지가 나오게 된다. 
-
 
 @application.route("/admin") #관리자 페이지
 def admin():
     return render_template("admin.html"); 
-
-
-    
-
 
 @application.route("/list")  #식단 보기 
 def list():
@@ -44,7 +41,6 @@ def list():
     print("이건 menu_list")
     print(menu_list)
     return render_template("list.html", menu_list = menu_list, length = length); 
-
 
 @application.route("/apply") # 식단 등록 - 입력 부분  
 def apply():
@@ -66,9 +62,6 @@ def applyphoto():
     database.save(date, main_menu, menu1, menu2, menu3, menu4, menu5, menu_price, menu_qty)
     
     return render_template("apply_photo.html"); #위의 값들 저장 후에 이 페이지를 렌더링 해준다. 
-
-
-
 
 
 @application.route("/apply_employee") # 사원 등록 - 입력부분 
@@ -104,29 +97,16 @@ def apply_board_proc():
     database.save_board(employee_num, title, content, password)
     return render_template("apply_board_proc.html"); #위의 값들 저장 후에 이 페이지를 렌더링 해준다. 
 
-
-
-
 @application.route("/order") # 주문하기
 def order():
     employee_num = request.args.get("employee_num")
     menu_chk0 = request.args.get("menu_chk0")
     menu_chk1 = request.args.get("menu_chk1")
     
-    #체크박스 체크여부를 받아와서 저장함 
-    
-    print("employee_num : ")
-    print(employee_num)
-    print("menu_chk0 : ")
-    print(menu_chk0)
-    print("menu_chk1 : ")
-    print(menu_chk1)
-    
+    #체크박스 체크여부를 받아와서 저장
     database.order_menu(employee_num, menu_chk0, menu_chk1) #order 테이블에 추가 
-    
-    
-    return render_template("order_success.html");
 
+    return render_template("order_success.html");
 
 @application.route("/sales")  
 def sales():
@@ -139,33 +119,29 @@ def sales_proc():
     print(sales_list)
     return render_template("sales_proc.html", sales_list = sales_list, month = month);
 
-     #사원별 총지출액
-
 @application.route("/employee_list")  #회원 목록 보기 
 def employee_list():
     employee_list = database.load_employee_list()
     length = len(employee_list)
     expense_list = [] #사원별 총지출액
     
-    
     for i in employee_list:
         expense_list.append(database.load_expense_list(i[0]))
-    
-    print("expense_list : ")
-    print(expense_list)
     
     return render_template("employee_list.html", employee_list = employee_list, length = length, expense_list = expense_list); 
     #return render_template("employee_list.html", employee_list = employee_list, length = length); 
 
-# 아래는 원본 
-
-@application.route("/upload_done", methods=["POST"]) 
+@application.route("/upload_done", methods = ['GET', 'POST']) 
 def upload_done():
-    uploaded_files = request.files["file"] #file 이라는 값을 받는다. 
-    uploaded_files.save("static/img/{}.jpeg".format(database.now_index())) #static 안에 img 라는 폴더 안에 저장해준다.  index로 이미지 이름을 저장한다. 
+    if request.method == 'POST':
+        uploaded_files = request.files['file'] #file 이라는 값을 받는다. 
+		#저장할 경로 + 파일명
+        uploaded_files.save('static/uploads/' + secure_filename(uploaded_files.filename)) # uploads 안에 저장
+
+    # uploaded_files.save("static/img/{}.jpeg".format(database.now_index())) # index로 이미지 이름을 저장한다. 
     return redirect(url_for("admin")) #admin 라는 함수로 보내준다. 
 
-
+# 아래는 원본 
 @application.route("/house_info/<int:index>/") 
 def house_info(index):
     '''menu_list = database.load_list()
@@ -189,7 +165,7 @@ def house_info(index):
 
 
 
-# 블로그 퍼옴 
+# 블로그 
 
 @application.route("/post") #게시판 페이지
 def post():
@@ -285,13 +261,10 @@ def write():
         conn.commit()
         cursor.close()
         conn.close()
-
         return render_template ('writeSuccess.html')
     
     else:
         return render_template ('write.html')
 
-
-
 if __name__ == "__main__":
-    application.run(host='0.0.0.0', port=int(sys.argv[1]))
+    application.run(host='0.0.0.0', port=8080)
