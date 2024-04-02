@@ -115,9 +115,6 @@ def load_list():  # 식단테이블 불러오기, menu_list 리스트에 담음
     
     for i in rows:
         menu_list.append(list(i))
-        
-    print("menu_list")
-    print(menu_list)
     
     return menu_list
 
@@ -130,19 +127,13 @@ def load_employee_list():  # 회원테이블 불러오기, employee_list 리스�
     
     for i in rows:
         employee_list.append(list(i))
-        
-    print("employee_list")
-    print(employee_list)
     
     return employee_list
 
 def load_today_list():  # 오늘 식단 불러오기, today_list 리스트에 담음
     today_list = []
 
-    print(dt_now)
-    
     sql = "SELECT * FROM cafeteria WHERE date = \'2022-12-03\';" ############오늘날짜가 나오게끔 해야함##############
-    print(sql)
     cursor.execute(sql)
     #cursor.execute(sql, (dt_now))
     
@@ -150,9 +141,6 @@ def load_today_list():  # 오늘 식단 불러오기, today_list 리스트에 �
     
     for i in rows:
         today_list.append(list(i))
-    
-    print("today_list")
-    print(today_list)
     
     return today_list
 
@@ -179,10 +167,7 @@ def load_sales_list(month): #선택한 달의 1일부터 ~막일까지 판매 �
     
         for j in rows:
             li.append(list(j))
-        
-    print("li")
-    print(li)
-    
+
     return li #주문수량 * 7000 = 총 지출금액
 
 def load_remaining_qty():  # 남은 수량 계산 
@@ -201,9 +186,6 @@ def load_remaining_qty():  # 남은 수량 계산
     rows = cursor.fetchall()
     for i in rows:
         menu_num_list.append(list(i))
-              
-    print("menu_num_list")
-    print(menu_num_list)
     
     #첫번째 메뉴 주문 수량 
     sql = "SELECT COUNT(menu_num) FROM order_menu WHERE menu_num=%s"   
@@ -223,7 +205,6 @@ def load_remaining_qty():  # 남은 수량 계산
     
     #메뉴 주문 수량을 int로 변환해서 리스트 저장 
     order_num_list = [int(order_num1[0][0]), int(order_num2[0][0])] #int 변환 
-    print(order_num_list)
     
     #메뉴 전체 수량을 가져옴  
     sql = "SELECT menu_qty FROM cafeteria WHERE date = \"2022-11-01\";"
@@ -232,17 +213,11 @@ def load_remaining_qty():  # 남은 수량 계산
     for i in rows:
         menu_qty_list.append(list(i))
     
-    
     #메뉴 전체 수량을 int로 변환 
     menu_qty_list2 = [int(menu_qty_list[0][0]), int(menu_qty_list[1][0])] #int 변환 
-    
-    print("menu_qty_list2")
-    print(menu_qty_list2)
-    
+
     #남은 수량 계산 = 전체수량에서 주문수량을 빼기 
     remaining_qty = [(menu_qty_list2[0] - order_num_list[0]), (menu_qty_list2[1] - order_num_list[1])]
-    print("remaining_qty")
-    print(remaining_qty)
     
     return remaining_qty
 
@@ -256,9 +231,6 @@ def load_board_list():  # 게시판 불러오기
     
     for i in rows:
         board_list.append(list(i))
-        
-    print("board_list")
-    print(board_list)
     
     return board_list
 
@@ -269,8 +241,7 @@ def save(date, main_menu, menu1, menu2, menu3, menu4, menu5, menu_price, menu_qt
     sql = "INSERT INTO cafeteria(date, main_menu, menu1, menu2, menu3, menu4, menu5, menu_price, menu_qty)  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor.execute(sql, (date, main_menu, menu1, menu2, menu3, menu4, menu5, menu_price, menu_qty))
     con.commit()
-    
-        
+
     return None #메뉴 번호를 리턴 
 
 # employee 테이블에 사원 추가 
@@ -303,9 +274,6 @@ def order_menu(employee_num, menu_chk0, menu_chk1): # 주문
     
     return None
 
-
-
-
 def now_index():
     sql = "SELECT COUNT(menu_num) FROM cafeteria;"
     menu_qty_list = [];
@@ -314,19 +282,15 @@ def now_index():
     for i in rows:
         menu_qty_list.append(list(i))
     
-    
     return menu_qty_list[0][0] #현재 인덱스 
 
 
-def load_house(idx): 
-    df = pd.read_csv("database.csv")
-    house_info = df.iloc[idx]
+# def load_house(idx): 
+#     df = pd.read_csv("database.csv")
+#     house_info = df.iloc[idx]
     
-    #DB연계 
-    #house_list 이용??,,,, 
-    #print("house_info 보기")
-    print(house_info)
-    return house_info
+#     print(house_info)
+#     return house_info
 
 
 if __name__ =="__main__":

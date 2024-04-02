@@ -27,7 +27,9 @@ def main():
     today_list = database.load_today_list()
     remaining_qty = database.load_remaining_qty()
     
+    print(today_list)
     return render_template("main.html", today_list = today_list, remaining_qty = remaining_qty); #이 페이지가 나오게 된다. 
+    
 
 @application.route("/admin") #관리자 페이지
 def admin():
@@ -38,8 +40,6 @@ def list():
     menu_list = database.load_list()
     length = len(menu_list)
     
-    print("이건 menu_list")
-    print(menu_list)
     return render_template("list.html", menu_list = menu_list, length = length); 
 
 @application.route("/apply") # 식단 등록 - 입력 부분  
@@ -77,8 +77,7 @@ def apply_employee_proc():
     department = request.args.get("department")
     
     database.save_employee(employee_num, employee_name, department)
-    return render_template("admin.html"); #위의 값들 저장 후에 이 페이지를 렌더링 해준다. 
-
+    return render_template("admin.html"); #위의 값들 저장 후에 이 페이지를 렌더링 해준다.
 
 
 @application.route("/apply_board") # 게시글 등록 - 입력부분 
@@ -116,7 +115,6 @@ def sales():
 def sales_proc():
     month = request.args.get("month")
     sales_list = database.load_sales_list(month) #1일부터 ~ 막일까지 판매수량 
-    print(sales_list)
     return render_template("sales_proc.html", sales_list = sales_list, month = month);
 
 @application.route("/employee_list")  #회원 목록 보기 
@@ -137,6 +135,7 @@ def upload_done():
         uploaded_files = request.files['file'] #file 이라는 값을 받는다. 
 		#저장할 경로 + 파일명
         uploaded_files.save('static/uploads/' + secure_filename(uploaded_files.filename)) # uploads 안에 저장
+        #uploaded_files.save('static/uploads/' + secure_filename(uploaded_files.filename)+'{}'.format(dt_now)) # uploads 안에 저장
 
     # uploaded_files.save("static/img/{}.jpeg".format(database.now_index())) # index로 이미지 이름을 저장한다. 
     return redirect(url_for("admin")) #admin 라는 함수로 보내준다. 
@@ -171,9 +170,6 @@ def house_info(index):
 def post():
     board_list = database.load_board_list()
     length = len(board_list)
-    
-    print("이건 board_list")
-    print(board_list)
     return render_template("post.html", board_list = board_list, length = length);
 
 
